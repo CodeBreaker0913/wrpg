@@ -12,6 +12,11 @@ const Navbar = () => {
           <CustomeLink to="/time">Time</CustomeLink>
           <CustomeLink to="/login">Login</CustomeLink>
           <CustomeLink to="/signup">Signup</CustomeLink>
+          <CustomeLink to="/leaderboard">Leaderboard</CustomeLink>
+          <CustomeLink to="/store">Store</CustomeLink>
+          <CustomeLink to="/quest">Quest</CustomeLink>
+          <CustomeLink to="/skills">Skills</CustomeLink>
+          <CustomeLink to="/upload">Upload</CustomeLink>
         </ul>
       </nav>
     </>
