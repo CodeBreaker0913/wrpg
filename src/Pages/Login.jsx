@@ -4,7 +4,7 @@ function Login() {
       <form method="POST">
         <h3>LOGIN</h3>
         <div>
-          <label for="username">Username</label>
+          <label htmlFor="username">Username</label>
           <input
             type="username"
             className="form-control"
@@ -14,17 +14,7 @@ function Login() {
           ></input>
         </div>
         <div>
-          <label for="email">Email Address</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            name="email"
-            placeholder="Enter email"
-          ></input>
-        </div>
-        <div>
-          <label for="password">Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             className="form-control"

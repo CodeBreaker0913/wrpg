@@ -1,9 +1,11 @@
+import { useState } from "react";
+
 function SignUp() {
   return (
     <>
       <h3>Signup</h3>
       <div>
-        <label for="username">Username</label>
+        <label htmlFor="username">Username</label>
         <input
           type="username"
           className="form-control"
@@ -13,7 +15,7 @@ function SignUp() {
         ></input>
       </div>
       <div>
-        <label for="email">Email Address</label>
+        <label htmlFor="email">Email Address</label>
         <input
           type="email"
           className="form-control"
@@ -23,7 +25,7 @@ function SignUp() {
         ></input>
       </div>
       <div>
-        <label for="password1">Password</label>
+        <label htmlFor="password1">Password</label>
         <input
           type="password"
           className="form-control"
@@ -33,7 +35,7 @@ function SignUp() {
         ></input>
       </div>
       <div>
-        <label for="password2">Confirm Password</label>
+        <label htmlFor="password2">Confirm Password</label>
         <input
           type="password"
           className="form-control"
