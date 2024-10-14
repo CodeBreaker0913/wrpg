@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, request, jsonify, session
+from flask import Flask, Blueprint, request, jsonify, session, redirect
 from flask_login import login_user, login_required, logout_user, current_user
 from .models import User
 from . import db
@@ -25,5 +25,7 @@ def signup():
     new_user = User(email=email, username=username, password=hashed_password)
     db.session.add(new_user)
     db.session.commit()
+
+    redirect(location="/home")
 
     return jsonify({"message": "User successfully registered"}), 201
