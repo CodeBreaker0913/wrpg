@@ -4,15 +4,15 @@ from .models import User
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
-signup = Blueprint("signup", __name__)
+signup_blueprint = Blueprint('signup', __name__)
 
-@signup.route("/signup", methods=["POST"])
+@signup_blueprint.route('/api/signup', methods=["POST"])
 def signup():
     data = request.get_json()
     username = data["username"]
     password = data["password"]
     email = data["email"]
-    hashed_password = generate_password_hash(password, "sha256")
+    hashed_password = generate_password_hash(password, "pbkdf2:sha256")
 
     existing_user = User.query.filter_by(username=username).first()
     existing_email = User.query.filter_by(email=email)

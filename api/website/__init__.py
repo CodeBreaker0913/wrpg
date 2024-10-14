@@ -15,10 +15,12 @@ def create_app():
     db.init_app(app)
 
     from .time import time_blueprint
-    from .login import login
+    from .signup import signup_blueprint
+    from .login import login_blueprint
 
     app.register_blueprint(time_blueprint)
-    app.register_blueprint(login)
+    app.register_blueprint(signup_blueprint)
+    app.register_blueprint(login_blueprint)
 
     with app.app_context():
         create_database()

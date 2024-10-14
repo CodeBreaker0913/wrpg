@@ -3,9 +3,9 @@ from flask_login import login_user, login_required, logout_user, current_user
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 
-login = Blueprint("login", __name__)
+login_blueprint = Blueprint("login", __name__)
 
-@login.route("/api/login", methods=["POST"])
+@login_blueprint.route("/api/login", methods=["POST"])
 def login():
     data = request.get_json()
     username = data["username"]
