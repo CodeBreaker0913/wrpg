@@ -7,22 +7,6 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.get("http://127.0.0.1:5000/api/signup", {
-        username,
-        email,
-        password,
-      });
-      setMessage(response.data.message);
-    } catch (error) {
-      setMessage(
-        error.response ? error.response.data.message : "An error occurred"
-      );
-    }
-  };
-
   return (
     <>
       <h3>Signup</h3>
