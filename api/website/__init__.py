@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_cors import CORS
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 db = SQLAlchemy()
 DB_NAME = 'database.db'
@@ -9,6 +10,7 @@ DB_NAME = 'database.db'
 def create_app():
     app = Flask(__name__)
     CORS(app)
+    login_manager = LoginManager(app)
 
     app.config["SECRET_KEY"] = "osjdoaijdsioajd"
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'

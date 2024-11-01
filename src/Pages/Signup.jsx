@@ -1,11 +1,45 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userId, setUserId] = useState();
   const [message, setMessage] = useState("");
+
+  const history = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      username,
+      email,
+      password,
+    };
+
+    const url = "http://127.0.0.1:5000/signup/create_user";
+
+    const response = await axios.post(url, data);
+
+    if (response.data.redirect_url) {
+      history(response.data.redirect_url);
+    } else {
+      const data = await response.json();
+      alert(data.message);
+    }
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    try {
+      axios.delete(`http://127.0.0.1:5000/signup/delete_user/${userId}`);
+    } catch (error) {
+      setMessage("Error: " + error.message);
+    }
+  };
 
   return (
     <>
@@ -48,6 +82,18 @@ function SignUp() {
           />
         </div>
         <button type="submit">Signup</button>
+      </form>
+      <br />
+      <form onSubmit={handleDelete}>
+        <div>
+          <label htmlFor="delete">User Id</label>
+          <input
+            type="number"
+            required
+            onChange={(e) => setUserId(e.target.value)}
+          />
+          <button type="submit">Delete User</button>
+        </div>
       </form>
 
       <h1>{message}</h1>
