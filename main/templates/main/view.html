@@ -1,0 +1,11 @@
+<!--prettier-ignore-->
+{% extends "main/base.html" %}
+
+{% block title %}
+View
+{% endblock %}
+
+{% block content %}
+    {% for td in user.skills.all %}
+<p>{{td.name}}</p>
+{% endfor %} {% endblock %}
