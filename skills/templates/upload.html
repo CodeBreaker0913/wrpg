@@ -1,0 +1,11 @@
+<!--prettier-ignore-->
+{% extends "main/base.html" %} {% block title %}Upload Image{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="post" class="form-group" action="" enctype="multipart/form-data">
+  {% csrf_token %} {{form|crispy}}
+  <br />
+  <button type="submit" class="btn btn-success">Register</button>
+</form>
+
+{% endblock %}
