@@ -2,8 +2,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import UploadFileForm
-from .models import Images
+from .models import Images, Skills
 import ollama
+import json
 
 def upload(request):
     if request.method == 'POST':
@@ -18,7 +19,7 @@ def upload(request):
             file_path = image_instance.image.path  # Get the file path
 
             # Send the file to Ollama
-            send_message(file_path)
+            send_message(file_path, request.user)
 
             return HttpResponseRedirect('/')  # Redirect to a success page or home
     else:
@@ -26,7 +27,7 @@ def upload(request):
 
     return render(request, 'upload.html', {'form': form})
 
-def send_message(file_path):
+def send_message(file_path, user):
     print("Sending file to Ollama:", file_path)
 
     # You can read the file as bytes and send it to Ollama
@@ -38,9 +39,40 @@ def send_message(file_path):
         model='llava',
         messages=[{
             'role': 'user',
-            'content': 'Describe this image',
+            'content': 'What is the skill practiced in the photo, respond with only with a json object {"skill":skill}',
             'images': [file_bytes]
         }]
     )
+    result = res["message"]["content"]
 
-    print(res["message"]["content"])  # Print the response from Ollama
+    try:
+        json_result = json.loads(result)
+    except Exception as e:
+        send_message(file_path, user)
+        return None
+
+    skill_name = json_result.get("skill", None)
+    
+    if not skill_name:
+        print("No skill found in the response.")
+        return
+
+    print(f"Skill identified: {skill_name}")
+
+    if not user.skills.filter(name__iexact=skill_name).exists():
+        new_skill = Skills.objects.create(
+            user = user,
+            name = skill_name,
+            level = 1,
+            current_exp = 0,
+            rank = "novice",
+        )
+
+        new_skill.save()
+
+        print(f"New skill '{skill_name}' created for user {user.username}.")
+    else:
+        print(f"Skill '{skill_name}' already exists for user {user.username}.")
+
+    
+    
