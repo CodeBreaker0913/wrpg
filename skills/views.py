@@ -39,7 +39,7 @@ def send_message(file_path, user):
         model='llava',
         messages=[{
             'role': 'user',
-            'content': 'What is the skill practiced in the photo, respond with only with a json object {"skill":skill}',
+            'content': 'What is the skill practiced in the photo, Return only with a JSON object structured as follows: {"skill":skill}, for example: {"skill": "Juggling"}',
             'images': [file_bytes]
         }]
     )
@@ -47,7 +47,10 @@ def send_message(file_path, user):
 
     try:
         json_result = json.loads(result)
+        print(result)
     except Exception as e:
+        print(result)
+        print(e)
         send_message(file_path, user)
         return None
 
@@ -59,7 +62,7 @@ def send_message(file_path, user):
 
     print(f"Skill identified: {skill_name}")
 
-    if not user.skills.filter(name__iexact=skill_name).exists():
+    if not user.skills.filter(name=skill_name).exists():
         new_skill = Skills.objects.create(
             user = user,
             name = skill_name,
@@ -72,6 +75,29 @@ def send_message(file_path, user):
 
         print(f"New skill '{skill_name}' created for user {user.username}.")
     else:
+
+        skill = user.skills.filter(name=skill_name).first()
+
+        if skill:
+            print(skill)
+            print(skill.name)
+            print(skill.current_exp)
+            print(skill.rank)
+            print(skill.level)
+        else:
+            print("skill not found")
+
+        res = ollama.chat(
+            model="llava",
+            messages=[
+                {
+                    'role': 'user',
+                    'content': f'Analyze the photo and determine the difficulty level of the skill being performed, for a person of skill level {skill.level}/60, with exponential growth, and a {skill.rank} in {skill}. Respond only with a JSON object structured as follows: {'difficulty': "difficulty_level"}, where difficulty_level is a number from 1 (easy) to 10 (very hard), use only integers.'
+                }
+            ]
+        )
+        
+
         print(f"Skill '{skill_name}' already exists for user {user.username}.")
 
     

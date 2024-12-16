@@ -1,0 +1,9 @@
+<!--prettier-ignore-->
+{% extends "main/base.html" %} {% block title %}Upload Image{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="post" action="{% url 'logout' %}">
+  {% csrf_token %}
+  <button type="submit">logout</button>
+</form>
+{% endblock %}

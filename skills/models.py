@@ -52,9 +52,6 @@ class Skills(models.Model):
     def update_exp_required(self):
         self.exp_required = int(100 * (1.5 ** int(self.level)))
 
-    def user_has_skill(user, skill_name):
-        return user.skills.filter(name__iexact=skill_name).exists()
-
     def __str__(self):
         return self.name
 

@@ -4,4 +4,3 @@ from .models import Skills, Images
 # Register your models here.
 
 admin.site.register(Skills)
-admin.site.register(Images)

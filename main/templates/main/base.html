@@ -30,6 +30,10 @@
         margin-left: 160px;
         padding: 0px 10px;
       }
+
+      p {
+        text-transform: capitalize;
+      }
     </style>
 
     <link
@@ -53,13 +57,19 @@
 
   <body>
     <div class="sidenav">
-      <a href="/">Home</a>
-      <a href="/create">Create</a>
-      <a href="/view">View</a>
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
-      <a href="/logout">Logout</a>
-      <a href="{% url 'upload' %}">Upload</a>
+      {% if user.is_authenticated %}
+      <a href="/" class="text-decoration-none">Home</a>
+      <a href="/view" class="text-decoration-none">View</a>
+      <a href="{% url 'upload' %}" class="text-decoration-none">Upload</a>
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" , class="btn btn-danger">Logout</button>
+      </form>
+      {% else %}
+      <a href="/" class="text-decoration-none">Home</a>
+      <a href="/register" class="text-decoration-none">Register</a>
+      <a href="/login" class="text-decoration-none">Login</a>
+      {% endif %}
     </div>
     <div id="content" , name="content" , class="main">
       <div class="row justify-content-center">
