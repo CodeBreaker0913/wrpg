@@ -1,0 +1,103 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Section Containers */
+.skill-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.major-skills,
+.minor-skills {
+  width: 48%;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+/* Skill Categories */
+.skill-category {
+  margin-bottom: 20px;
+}
+
+.skill-category h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+/* Skill Bar Container */
+.skill {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.skill-icon {
+  width: 30px;
+  height: 30px;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-name {
+  width: 100px;
+  margin-right: 10px;
+}
+
+.skill-bar {
+  flex: 1;
+  height: 10px;
+  background: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: #4caf50;
+}
+
+/* Skill Level */
+.skill-level {
+  width: 30px;
+  text-align: right;
+  margin-left: 10px;
+}
+
+/* Governing Attribute Section */
+.attribute-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.attribute-section p {
+  margin: 5px 0;
+}
+
+.attribute-section .level {
+  font-weight: bold;
+}
+
+/* Logo or Graphic */
+.logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 10px;
+  background: #eee;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,22 +1,73 @@
 <!--prettier-ignore-->
 {% extends "main/base.html" %}
 
-{% block title %}
-View
-{% endblock %}
+{% load static %}
 
-{% block content %}
-    {% for td in user.skills.all %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Django App</title>
+    <!-- Link to the CSS file -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'main/css/skill_page.css' %}"
+    />
+  </head>
 
-<ul class="list-unstyled">
-  <li>
-    <p class="lead"><strong>{{td.name}}</strong></p>
-  </li>
-  <ul>
-    <li><p>Level - {{td.level}}</p></li>
-    <li><p>Exp - {{td.current_exp}}/{{td.exp_required}}</p></li>
-    <li><p>Rank - {{td.rank}}</p></li>
+  {% block title %} View {% endblock %}
+  <h2>Major Skills</h2>
+  {% block content %} {% for td in user.skills.all %}
+
+  <div class="major-skills">
+    <div class="skill">
+      <!--<div class="skill-icon">📜</div>-->
+      <div class="skill-name">{{td.name}}</div>
+      <div class="skill-bar">
+        <div class="skill-bar-fill" style="width: 52%"></div>
+      </div>
+      <div class="skill-level">{{td.level}}</div>
+    </div>
+    <!-- Repeat for other skills -->
+  </div>
+  <!--
+  <ul class="list-unstyled">
+    <li>
+      <p class="lead"><strong>{{td.name}}</strong></p>
+    </li>
+    <ul>
+      <li><p>Level - {{td.level}}</p></li>
+      <li><p>Exp - {{td.current_exp}}/{{td.exp_required}}</p></li>
+      <li><p>Rank - {{td.rank}}</p></li>
+    </ul>
   </ul>
-</ul>
+  -->
 
-{% endfor %} {% endblock %}
+  {% endfor %}
+  <!--
+<div class="skill-section">
+  
+  <div class="minor-skills">
+    <h2>Minor Skills</h2>
+    <div class="skill">
+      <div class="skill-icon">🎨</div>
+      <div class="skill-name">Drawing</div>
+      <div class="skill-bar">
+        <div class="skill-bar-fill" style="width: 33%;"></div>
+      </div>
+      <div class="skill-level">33</div>
+    </div>
+  </div>
+</div>
+
+<div class="attribute-section">
+  <div class="logo">5</div>
+  <p>Governing Attribute: Mental</p>
+  <p>Level: <span class="level">Master</span></p>
+</div>
+-->
+
+  {% endblock %}
+</html>

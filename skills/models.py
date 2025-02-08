@@ -45,12 +45,14 @@ class Skills(models.Model):
     
     def add_exp(self, added_exp):
         self.current_exp += added_exp
-        if self.current_exp >= self.exp_required:
+        while self.current_exp >= self.exp_required:
+            self.current_exp -= self.exp_required
             next_level = self.level + 1
             self.set_level(new_level=next_level)
+            
     
     def update_exp_required(self):
-        self.exp_required = int(100 * (1.5 ** int(self.level)))
+        self.exp_required = int(100 * (1.1 ** int(self.level)))
 
     def __str__(self):
         return self.name
